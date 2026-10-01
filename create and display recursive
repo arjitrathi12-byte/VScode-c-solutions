@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    int data;
+    struct Node*next;
+};
+
+struct Node*create(int n){
+    if(n==0) return NULL;
+    
+   struct Node *newNode = malloc(sizeof(struct Node));
+    scanf("%d", &newNode->data);
+    newNode->next = create(n-1);
+    return newNode;
+}
+
+void display(struct Node *head) {
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+int count(struct Node*head){
+    int count = 0;
+    struct Node*temp = head;
+    while(temp != NULL){
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+int main(){
+    int n;
+    struct Node*head= NULL;
+    printf("Enter the value for n: ");
+    scanf("%d", &n);
+    
+    head=create(n);
+    display(head);
+    printf("%d", count(head));
+    
+    return 0;
+}
